@@ -1,2 +1,2 @@
 # sciview
-Scientific visualization using pythreejs
+High-performance scientific data visualization for Jupyter
