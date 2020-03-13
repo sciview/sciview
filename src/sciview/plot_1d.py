@@ -3,13 +3,14 @@
 # @author Neil Vaytet
 
 from . import config
+from .render import render
 
 import pythreejs as p3
 # import ipywidgets as widgets
 import numpy as np
 # import IPython.display as disp
 
-def plot_1d(x, y, color="blue", linewidth=2):
+def plot_1d(x, y, color="blue", linewidth=2, background="#DDDDDD"):
 
 
     if len(x) != len(y):
@@ -26,7 +27,7 @@ def plot_1d(x, y, color="blue", linewidth=2):
     scale_x = dx / (np.amax(x) - xmin)
     scale_y = dy / (np.amax(y) - ymin)
 
-    pts = np.zeros([N, 3])
+    pts = np.zeros([N, 3], dtype=np.float32)
     pts[:, 0] = (x - xmin) * scale_x
     pts[:, 1] = (y - ymin) * scale_y
     # arr = p3.BufferAttribute(array=pts)
@@ -43,13 +44,17 @@ def plot_1d(x, y, color="blue", linewidth=2):
     # camera = p3.PerspectiveCamera(position=[0.5*dx, 0.5*dy, 0],
     #                                         aspect=dx / dy)
     camera = p3.OrthographicCamera(0, dx, 0, dy, -0.5*dx, 0.5*dx)
-    # key_light = p3.DirectionalLight(position=[0, 10, 10])
-    # ambient_light = p3.AmbientLight()
-    scene = p3.Scene(children=[line, camera], background="#DDDDDD")
-    controller = p3.OrbitControls(controlling=camera, enableRotate=False)
-    # Render the scene into a widget
-    renderer = p3.Renderer(camera=camera, scene=scene,
-                                     controls=[controller],
-                                     width=dx,
-                                     height=dy)
-    return renderer
+
+    return render(objects=line, camera=camera, background=background,
+                  enableRotate=False, width=dx, height=dy)
+
+    # # key_light = p3.DirectionalLight(position=[0, 10, 10])
+    # # ambient_light = p3.AmbientLight()
+    # scene = p3.Scene(children=[line, camera], background="#DDDDDD")
+    # controller = p3.OrbitControls(controlling=camera, enableRotate=False)
+    # # Render the scene into a widget
+    # renderer = p3.Renderer(camera=camera, scene=scene,
+    #                                  controls=[controller],
+    #                                  width=dx,
+    #                                  height=dy)
+    # return renderer

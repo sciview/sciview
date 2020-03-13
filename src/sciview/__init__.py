@@ -4,3 +4,4 @@
 # @author Neil Vaytet
 
 from .plot import plot
+from .plot_2d import plot_2d
