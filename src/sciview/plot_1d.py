@@ -43,7 +43,7 @@ def plot_1d(x, y, color="blue", linewidth=2, background="#DDDDDD"):
     # Create the threejs scene with ambient light and camera
     # camera = p3.PerspectiveCamera(position=[0.5*dx, 0.5*dy, 0],
     #                                         aspect=dx / dy)
-    camera = p3.OrthographicCamera(0, dx, 0, dy, -0.5*dx, 0.5*dx)
+    camera = p3.OrthographicCamera(0, dx, dy, 0, 0.5*dx, -0.5*dx)
 
     return render(objects=line, camera=camera, background=background,
                   enableRotate=False, width=dx, height=dy)
